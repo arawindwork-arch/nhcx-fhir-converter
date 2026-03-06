@@ -1,0 +1,626 @@
+{
+  "resourceType": "Bundle",
+  "id": "7990cef5-910d-44e1-8d5f-be6c7acde639",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-03-03T07:06:16.000+00:00",
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlanBundle"
+    ]
+  },
+  "type": "collection",
+  "timestamp": "2026-03-03T07:06:16.000+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:d20c79d3-d111-4622-adf2-5d1854008a15",
+      "resource": {
+        "resourceType": "InsurancePlan",
+        "id": "d20c79d3-d111-4622-adf2-5d1854008a15",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlan"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://nrces.in/ndhm/fhir/r4/identifier/insurance-plan",
+            "value": "BAJHLIP23020V012223"
+          }
+        ],
+        "status": "active",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-insuranceplan-type",
+                "code": "INDV",
+                "display": "Individual"
+              }
+            ],
+            "text": "individual"
+          }
+        ],
+        "name": "Global Health Care",
+        "period": {
+          "start": "2026-03-03"
+        },
+        "ownedBy": {
+          "reference": "Organization/a2999cea-545a-45e2-ac68-b00bfa01066b"
+        },
+        "coverageArea": [
+          {
+            "display": "India"
+          }
+        ],
+        "contact": [
+          {
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "1800 209 0144"
+              },
+              {
+                "system": "email",
+                "value": "bagichelp@bajajallianz.co.in"
+              },
+              {
+                "system": "url",
+                "value": "www.bajajallianz.com"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "waiting-period"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to treatment of pre-existing diseases and its complications until 36 months of continuous coverage."
+              },
+              {
+                "url": "waitingPeriod",
+                "valueDuration": {
+                  "value": 1095,
+                  "unit": "days",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "waiting-period"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to treatment of specified diseases until 24 months of continuous coverage."
+              },
+              {
+                "url": "waitingPeriod",
+                "valueDuration": {
+                  "value": 730,
+                  "unit": "days",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "waiting-period"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to treatment of any illness within 30 days from the first policy commencement date."
+              },
+              {
+                "url": "waitingPeriod",
+                "valueDuration": {
+                  "value": 30,
+                  "unit": "days",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to any admission primarily for diagnostics and evaluation purposes only."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to any admission primarily for enforced bed rest and not for receiving treatment."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to surgical treatment of obesity that does not meet specified conditions."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to any treatment to change characteristics of the body to those of the opposite sex."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses for cosmetic or plastic surgery unless for reconstruction following an accident."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to treatment necessitated due to participation in hazardous or adventure sports."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses for treatment related to alcoholism, drug or substance abuse."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Expenses related to childbirth and lawful medical termination of pregnancy."
+              }
+            ]
+          }
+        ],
+        "coverage": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "IPH",
+                  "display": "In-Patient Hospitalization"
+                }
+              ],
+              "text": "In-patient Hospitalization Treatment"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "In-patient Hospitalization Treatment"
+                },
+                "limit": [
+                  {
+                    "code": {
+                      "text": "Room rent and boarding expenses"
+                    }
+                  },
+                  {
+                    "code": {
+                      "text": "ICU expenses"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Pre-Hospitalization Medical Expenses"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Pre-Hospitalization"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Post-Hospitalization Medical Expenses"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Post-Hospitalization"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Local (Road) Ambulance"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Ambulance Charges"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "DC",
+                  "display": "Day Care"
+                }
+              ],
+              "text": "Day Care Procedures"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Day Care Procedures"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Living Donor Medical Costs"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Living Donor Expenses"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 500000.0,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Living Donor Medical Costs"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Annual Preventive Health Check-up"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Preventive Health Check-up"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 5000.0,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Annual Preventive Health Check-up"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "AYUSH",
+                  "display": "AYUSH Treatment"
+                }
+              ],
+              "text": "Ayurvedic / Homeopathic Hospitalization Expenses"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Ayurvedic / Homeopathic Treatment"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Air Ambulance"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Air Ambulance Charges"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 500000.0,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Air Ambulance"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Mental Illness Treatment"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Mental Illness Treatment"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Rehabilitation"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Rehabilitation Treatment"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "OTH",
+                  "display": "Other"
+                }
+              ],
+              "text": "Modern Treatment Methods and Advancement in Technologies"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Modern Treatment Methods"
+                }
+              }
+            ]
+          }
+        ],
+        "plan": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "imperial",
+                  "display": "Imperial"
+                }
+              ],
+              "text": "Imperial"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 3750000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "imperial-plus",
+                  "display": "Imperial Plus"
+                }
+              ],
+              "text": "Imperial Plus"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 5600000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a2999cea-545a-45e2-ac68-b00bfa01066b",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "a2999cea-545a-45e2-ac68-b00bfa01066b",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"
+          ]
+        },
+        "name": "Bajaj Allianz General Insurance Company Limited",
+        "identifier": [
+          {
+            "system": "https://irdai.gov.in/registration",
+            "value": "113"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "1800 209 0144"
+          },
+          {
+            "system": "email",
+            "value": "bagichelp@bajajallianz.co.in"
+          },
+          {
+            "system": "url",
+            "value": "www.bajajallianz.com"
+          }
+        ]
+      }
+    }
+  ]
+}

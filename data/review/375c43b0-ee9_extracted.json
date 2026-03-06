@@ -1,0 +1,111 @@
+{
+  "plan_name": "Global Health Care",
+  "plan_aliases": [
+    "Bajaj Allianz General Insurance Co. Ltd."
+  ],
+  "plan_identifier": "BAJHLIP23020V012223",
+  "plan_type": "string",
+  "status": "active",
+  "insurer_name": "string",
+  "insurer_irdai_registration": "113",
+  "tpa_name": null,
+  "effective_from": null,
+  "effective_to": null,
+  "coverage_areas": [
+    "India"
+  ],
+  "coverages": [
+    {
+      "coverage_type": "inpatient | daycare | outpatient | maternity | domiciliary | organ-donor | ayush | other",
+      "description": "health insurance coverage",
+      "benefits": [
+        {
+          "name": "Accident",
+          "benefit_type": null,
+          "description": "sudden, unforeseen and involuntary event caused by external, visible and violent means.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [
+            "Condition Precedent"
+          ],
+          "supporting_docs": []
+        },
+        {
+          "name": "Any one Illness",
+          "benefit_type": null,
+          "description": "continuous Period of Illness and it includes relapse within 45 days from the date of last consultation with the Hospital/Nursing Home where treatment was taken.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [
+            "Condition Precedent"
+          ],
+          "supporting_docs": []
+        },
+        {
+          "name": "AYUSH Hospital",
+          "benefit_type": null,
+          "description": "healthcare facility wherein medical/surgical/para-surgical treatment procedures and interventions are carried out by AYUSH Medical Practitioner(s).",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [
+            "Condition Precedent"
+          ],
+          "supporting_docs": []
+        },
+        {
+          "name": "AYUSH Day Care Centre",
+          "benefit_type": null,
+          "description": "health centre which is registered with the local authorities, wherever applicable and having facilities for carrying out treatment procedures and medical or surgical/para-surgical interventions or both under the supervision of registered AYUSH Medical Practitioner(s) on Day Care Treatment basis without Inpatient services.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [
+            "Condition Precedent"
+          ],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [
+        "Condition Precedent"
+      ],
+      "supporting_info_requirements": []
+    }
+  ],
+  "plan_costs": [
+    {
+      "sum_insured": null,
+      "premium": null,
+      "copay_percentage": null,
+      "deductible": null,
+      "age_band": null,
+      "plan_variant": null
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Congenital Anomaly",
+      "description": "condition which is present since birth, and which is abnormal with reference to form, structure or position.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Dental Treatment",
+      "description": "treatment related to teeth or structures supporting teeth including examinations, fillings (where appropriate), crowns, extractions and surgery.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    }
+  ],
+  "initial_waiting_period_days": 30,
+  "pre_existing_disease_waiting_days": 1095,
+  "specific_disease_waiting_days": 730,
+  "contact_phone": "1800 209 0144 / Service - 1800 209 5858 (Toll Free No.)",
+  "contact_email": "bagichelp@bajajallianz.co.in",
+  "contact_website": "www.bajajallianz.com",
+  "network_hospital_count": null,
+  "extraction_confidence": 0.85,
+  "source_pdf_filename": "Bajaj_01.pdf",
+  "extraction_warnings": []
+}

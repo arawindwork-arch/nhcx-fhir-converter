@@ -1,0 +1,75 @@
+# ============================================
+# .gitignore for NHCX Insurance Plan PDF to FHIR Converter
+# ============================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ---------- Virtual Environment ----------
+venv/
+env/
+.venv/
+ENV/
+
+# ---------- IDE / Editor ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ---------- OS Files ----------
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ---------- Environment & Secrets ----------
+# CRITICAL: Never push API keys, encryption keys, or secrets
+.env
+.env.local
+.env.production
+*.pem
+*.key
+secrets/
+config/secrets.yaml
+
+# ---------- Logs & Cache ----------
+*.log
+logs/
+.cache/
+.pytest_cache/
+htmlcov/
+
+# ---------- Uploaded PDFs (Patient Data - DPDP Act Compliance) ----------
+# Never push actual insurance PDFs - they contain PII/PHI
+uploads/
+input_pdfs/
+*.pdf
+!docs/*.pdf
+
+# ---------- Output Files (Generated FHIR Bundles) ----------
+# Keep sample outputs, exclude bulk processing results  
+output/bulk_*.json
+output/batch_*/
+
+# ---------- Database ----------
+*.db
+*.sqlite3
+
+# ---------- Node Modules (if dashboard uses npm) ----------
+node_modules/
+package-lock.json
+
+# ---------- Distribution ----------
+*.zip
+*.tar.gz

@@ -1,0 +1,36 @@
+# NHCX Insurance Plan FHIR Converter — Dependencies
+# ===================================================
+
+# ── Core Framework ───────────────────────────────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+
+# ── PDF Processing ───────────────────────────────────────────────────────
+pdfplumber==0.11.4
+PyPDF2==3.0.1
+
+# ── OCR (optional — for scanned PDFs) ───────────────────────────────────
+# pdf2image==1.17.0
+# pytesseract==0.3.13
+
+# ── LLM / AI ────────────────────────────────────────────────────────────
+langchain-core>=0.3.29
+langchain-openai>=0.3.0        # For OpenAI GPT-4o
+# langchain-anthropic>=0.3.0   # For Anthropic Claude
+# langchain-google-genai>=2.0.0 # For Google Gemini
+# langchain-community>=0.3.0  # For Ollama (local)
+
+# ── Excel Output ─────────────────────────────────────────────────────────
+openpyxl==3.1.5
+
+# ── Configuration ────────────────────────────────────────────────────────
+pyyaml==6.0.2
+python-dotenv==1.0.1
+
+# ── Testing ──────────────────────────────────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.24.0
+httpx==0.28.1

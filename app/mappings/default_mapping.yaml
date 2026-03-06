@@ -1,0 +1,160 @@
+# Default NHCX FHIR Mapping Configuration
+# ==========================================
+# Configuration-driven mappings for Indian health insurance terminology.
+# Add insurer-specific overrides by creating new YAML files in this directory.
+#
+# Naming convention: {insurer_name}_mapping.yaml
+# Example: star_health_mapping.yaml, icici_lombard_mapping.yaml
+
+# ── Insurance Plan Type Mapping ──────────────────────────────────────────
+plan_type_aliases:
+  individual:
+    - "individual health insurance"
+    - "individual policy"
+    - "individual mediclaim"
+  family-floater:
+    - "family floater"
+    - "family health insurance"
+    - "family plan"
+    - "floater"
+  group:
+    - "group health insurance"
+    - "group mediclaim"
+    - "corporate policy"
+    - "employer plan"
+  critical-illness:
+    - "critical illness"
+    - "CI plan"
+    - "critical care"
+  top-up:
+    - "top up"
+    - "top-up"
+    - "topup"
+  super-top-up:
+    - "super top up"
+    - "super top-up"
+    - "super topup"
+
+# ── Coverage Type Mapping ────────────────────────────────────────────────
+coverage_type_aliases:
+  inpatient:
+    - "in-patient hospitalization"
+    - "inpatient hospitalization"
+    - "IPD"
+    - "hospitalization"
+    - "hospitalisation"
+  daycare:
+    - "day care"
+    - "daycare procedures"
+    - "day care treatment"
+    - "listed daycare"
+  outpatient:
+    - "out-patient"
+    - "outpatient"
+    - "OPD"
+    - "doctor consultation"
+  maternity:
+    - "maternity"
+    - "maternity benefit"
+    - "normal delivery"
+    - "caesarean"
+    - "newborn cover"
+  domiciliary:
+    - "domiciliary hospitalization"
+    - "domiciliary treatment"
+    - "home treatment"
+  organ-donor:
+    - "organ donor"
+    - "organ donor expenses"
+    - "living donor"
+  ayush:
+    - "AYUSH"
+    - "ayurveda"
+    - "yoga"
+    - "unani"
+    - "siddha"
+    - "homeopathy"
+    - "naturopathy"
+
+# ── Common Indian Health Insurance Terms ─────────────────────────────────
+benefit_term_mapping:
+  room_rent: "Room Rent / Boarding Expenses"
+  icu_charges: "ICU / ICCU Charges"
+  pre_hospitalization: "Pre-Hospitalization Expenses"
+  post_hospitalization: "Post-Hospitalization Expenses"
+  ambulance: "Ambulance Charges"
+  cataract: "Cataract Treatment"
+  knee_replacement: "Knee Replacement"
+  bariatric_surgery: "Bariatric Surgery"
+  robotic_surgery: "Robotic Surgery"
+  dialysis: "Dialysis"
+  chemotherapy: "Chemotherapy"
+  radiotherapy: "Radiotherapy"
+  organ_transplant: "Organ Transplant"
+  mental_illness: "Mental Illness Treatment"
+  dental: "Dental Treatment"
+  restoration_benefit: "Restoration / Recharge Benefit"
+  cumulative_bonus: "Cumulative Bonus / No Claim Bonus"
+  health_checkup: "Annual Health Check-up"
+  second_opinion: "Second Medical Opinion"
+  compassionate_visit: "Compassionate Visit"
+  air_ambulance: "Air Ambulance"
+  emergency_overseas: "Emergency Treatment Abroad"
+
+# ── Common Exclusions (Permanent) ────────────────────────────────────────
+common_permanent_exclusions:
+  - "Cosmetic or plastic surgery (unless medically necessary)"
+  - "Dental treatment (unless resulting from accident)"
+  - "War, terrorism, nuclear contamination"
+  - "Self-inflicted injuries"
+  - "Hazardous activities / adventure sports"
+  - "Infertility / IVF treatment"
+  - "External congenital anomalies"
+  - "Non-allopathic treatment (except AYUSH if covered)"
+  - "Weight management / obesity surgery (unless medically necessary)"
+  - "Change of gender treatment"
+  - "Refractive error correction"
+  - "Unproven / experimental treatment"
+  - "Substance abuse / alcoholism"
+
+# ── Waiting Period Defaults (IRDAI standard) ─────────────────────────────
+waiting_periods:
+  initial_waiting_days: 30
+  pre_existing_disease_waiting_days: 1095  # 36 months (IRDAI standard)
+  specific_disease_waiting_days: 730       # 24 months (IRDAI standard)
+
+# ── Major Indian Insurers ────────────────────────────────────────────────
+known_insurers:
+  star_health:
+    full_name: "Star Health and Allied Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/SHAIICL/2006/001"
+  icici_lombard:
+    full_name: "ICICI Lombard General Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/ILGICL/2001/115"
+  niva_bupa:
+    full_name: "Niva Bupa Health Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/NBHICL/2008/157"
+  care_health:
+    full_name: "Care Health Insurance Ltd."
+    irdai_reg: "IRDAI/HLT/CHICL/2012/174"
+  hdfc_ergo:
+    full_name: "HDFC Ergo General Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/HEGICL/2002/146"
+  max_bupa:
+    full_name: "Niva Bupa Health Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/NBHICL/2008/157"
+  bajaj_allianz:
+    full_name: "Bajaj Allianz General Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/BAGICL/2001/113"
+  new_india:
+    full_name: "The New India Assurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/TNIACL/2002/100"
+  national_insurance:
+    full_name: "National Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/NICL/2002/106"
+  united_india:
+    full_name: "United India Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/UIICL/2002/107"
+  oriental:
+    full_name: "The Oriental Insurance Co. Ltd."
+    irdai_reg: "IRDAI/HLT/TOICL/2002/108"

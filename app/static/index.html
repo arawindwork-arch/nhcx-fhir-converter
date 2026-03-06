@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHCX Insurance Plan → FHIR Converter | ABDM Digital Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Stanford Medicine-inspired palette */
+            --cardinal: #8C1515;
+            --cardinal-dark: #6B1010;
+            --cardinal-light: #B83A4B;
+            --navy: #0D2137;
+            --navy-light: #1A3A5C;
+            --teal: #007C92;
+            --teal-light: #009FB7;
+            --green-success: #0D7C3E;
+            --amber-warn: #E98300;
+            --red-error: #B1040E;
+
+            /* Neutral palette */
+            --bg-primary: #F8F9FB;
+            --bg-card: #FFFFFF;
+            --bg-code: #1E293B;
+            --text-primary: #0F1729;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: #E2E8F0;
+            --border-focus: var(--teal);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--cardinal-dark) 100%);
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .brand-text h1 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-security {
+            background: rgba(13,124,62,0.3);
+            color: #6EE7A0;
+            border: 1px solid rgba(110,231,160,0.3);
+        }
+
+        .badge-fhir {
+            background: rgba(0,124,146,0.3);
+            color: #7DD3E8;
+            border: 1px solid rgba(125,211,232,0.3);
+        }
+
+        .badge-version {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* ── NAVIGATION TABS ── */
+        .nav-tabs {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tabs-inner {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 14px 20px;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover { color: var(--text-primary); }
+        .tab-btn.active {
+            color: var(--cardinal);
+            border-bottom-color: var(--cardinal);
+        }
+
+        .tab-icon { font-size: 15px; }
+
+        /* ── MAIN CONTENT ── */
+        .main { max-width: 1400px; margin: 0 auto; padding: 24px 32px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover { box-shadow: var(--shadow-md); }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-body { padding: 24px; }
+
+        /* ── UPLOAD ZONE ── */
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--teal);
+            background: linear-gradient(135deg, #F0FDFA 0%, #E0F7FA 100%);
+            box-shadow: 0 0 0 3px rgba(0,124,146,0.1);
+        }
+
+        .upload-zone.processing {
+            border-color: var(--amber-warn);
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+            pointer-events: none;
+        }
+
+        .upload-zone.success {
+            border-color: var(--green-success);
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+        }
+
+        .upload-icon { font-size: 48px; margin-bottom: 16px; }
+        .upload-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+        .upload-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .upload-formats { 
+            margin-top: 16px; 
+            display: inline-flex; 
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(0,0,0,0.04);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ── PIPELINE STATUS ── */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 20px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 110px;
+            flex: 1;
+        }
+
+        .stage-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 2px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-muted);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .stage-dot.active {
+            border-color: var(--teal);
+            background: var(--teal);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(0,124,146,0.15);
+            animation: pulse 2s infinite;
+        }
+
+        .stage-dot.complete {
+            border-color: var(--green-success);
+            background: var(--green-success);
+            color: white;
+        }
+
+        .stage-dot.error {
+            border-color: var(--red-error);
+            background: var(--red-error);
+            color: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(0,124,146,0.15); }
+            50% { box-shadow: 0 0 0 8px rgba(0,124,146,0.08); }
+        }
+
+        .stage-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: center; }
+        .stage-time { font-size: 10px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+        
+        .pipeline-connector {
+            height: 2px;
+            flex: 0.5;
+            min-width: 20px;
+            background: var(--border);
+            transition: background 0.4s;
+        }
+
+        .pipeline-connector.complete { background: var(--green-success); }
+
+        /* ── GRID LAYOUTS ── */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+        @media (max-width: 900px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* ── METRICS CARDS ── */
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            transition: all 0.2s;
+        }
+
+        .metric-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        .metric-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .metric-value { font-size: 28px; font-weight: 700; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
+        .metric-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+        /* ── SECURITY STATUS ── */
+        .security-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+        .security-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .security-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .security-icon.green { background: #DCFCE7; color: var(--green-success); }
+        .security-icon.blue { background: #DBEAFE; color: #1D4ED8; }
+        .security-icon.amber { background: #FEF3C7; color: #B45309; }
+
+        .security-info h4 { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+        .security-info p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ── CODE DISPLAY ── */
+        .code-block {
+            background: var(--bg-code);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #E2E8F0;
+            overflow-x: auto;
+            line-height: 1.7;
+            border: 1px solid #334155;
+        }
+
+        .code-block .key { color: #7DD3FC; }
+        .code-block .string { color: #86EFAC; }
+        .code-block .number { color: #FDE68A; }
+        .code-block .bracket { color: #94A3B8; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--cardinal);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--cardinal-dark); box-shadow: var(--shadow-md); }
+
+        .btn-teal {
+            background: var(--teal);
+            color: white;
+        }
+        .btn-teal:hover { background: #006B7D; }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover { background: var(--bg-primary); }
+
+        .btn-sm { padding: 6px 12px; font-size: 12px; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ── EXTRACTED DATA TABLE ── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--bg-primary);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover td { background: #F8FAFC; }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-pill.success { background: #DCFCE7; color: var(--green-success); }
+        .status-pill.warning { background: #FEF3C7; color: #B45309; }
+        .status-pill.error { background: #FEE2E2; color: var(--red-error); }
+        .status-pill.info { background: #DBEAFE; color: #1D4ED8; }
+
+        /* ── COMPLIANCE FRAMEWORK ── */
+        .compliance-card {
+            padding: 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .compliance-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .compliance-header h4 { font-size: 14px; font-weight: 700; }
+
+        .compliance-controls {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .compliance-controls li {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .compliance-controls li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green-success);
+            font-weight: 700;
+        }
+
+        /* ── RESULTS PANEL ── */
+        .results-panel {
+            display: none;
+            margin-top: 20px;
+        }
+        .results-panel.visible { display: block; animation: fadeIn 0.4s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 24px 32px;
+            color: var(--text-muted);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .footer a { color: var(--teal); text-decoration: none; }
+
+        /* ── LOG VIEWER ── */
+        .log-viewer {
+            background: var(--bg-code);
+            border-radius: var(--radius);
+            padding: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            line-height: 1.8;
+            color: #94A3B8;
+        }
+
+        .log-entry { padding: 2px 0; }
+        .log-entry .timestamp { color: #64748B; }
+        .log-entry .level-info { color: #38BDF8; }
+        .log-entry .level-success { color: #4ADE80; }
+        .log-entry .level-warn { color: #FBBF24; }
+        .log-entry .level-error { color: #F87171; }
+
+        /* ── QUALITY GAUGE ── */
+        .gauge-container { text-align: center; padding: 20px; }
+        .gauge-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gauge-ring::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 6px solid var(--border);
+        }
+        .gauge-value {
+            font-size: 32px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gauge-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* ── SPACERS ── */
+        .mt-16 { margin-top: 16px; }
+        .mt-20 { margin-top: 20px; }
+        .mt-24 { margin-top: 24px; }
+        .gap-20 { gap: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header">
+    <div class="header-inner">
+        <div class="header-brand">
+            <div class="brand-icon">🏥</div>
+            <div class="brand-text">
+                <h1>NHCX Insurance Plan → FHIR Converter</h1>
+                <span>Ayushman Bharat Digital Mission · NHA Hackathon 2026</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <span class="badge badge-security">🔒 DPDP Compliant</span>
+            <span class="badge badge-fhir">🔥 FHIR R4 · NRCeS v6.5</span>
+            <span class="badge badge-version">v1.0.0</span>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════ TABS ═══════════════ -->
+<div class="nav-tabs">
+    <div class="tabs-inner">
+        <button class="tab-btn active" onclick="switchTab('converter')">
+            <span class="tab-icon">📄</span> Converter
+        </button>
+        <button class="tab-btn" onclick="switchTab('security')">
+            <span class="tab-icon">🛡️</span> Security & Compliance
+        </button>
+        <button class="tab-btn" onclick="switchTab('quality')">
+            <span class="tab-icon">📊</span> Quality Metrics
+        </button>
+        <button class="tab-btn" onclick="switchTab('api')">
+            <span class="tab-icon">⚡</span> API Explorer
+        </button>
+    </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="main">
+
+    <!-- ═══ TAB 1: CONVERTER ═══ -->
+    <div id="tab-converter" class="tab-content active">
+        
+        <!-- Pipeline Status -->
+        <div class="card">
+            <div class="card-header">
+                <h3>⚙️ Conversion Pipeline</h3>
+                <span class="status-pill info" id="pipeline-status">Ready</span>
+            </div>
+            <div class="card-body">
+                <div class="pipeline" id="pipeline-vis">
+                    <div class="pipeline-stage">
+                        <div class="stage-dot" id="stage-1">📤</div>
+                        <div class="stage-label">PDF Upload</div>
+                        <div class="stage-time" id="stage-1-time">—</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-1"></div>
+                    <div class="pipeline-stage">
+                        <div class="stage-dot" id="stage-2">📝</div>
+                        <div class="stage-label">Text Extract</div>
+                        <div class="stage-time" id="stage-2-time">—</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-2"></div>
+                    <div class="pipeline-stage">
+                        <div class="stage-dot" id="stage-3">🤖</div>
+                        <div class="stage-label">LLM Analysis</div>
+                        <div class="stage-time" id="stage-3-time">—</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-3"></div>
+                    <div class="pipeline-stage">
+                        <div class="stage-dot" id="stage-4">🔄</div>
+                        <div class="stage-label">FHIR Mapping</div>
+                        <div class="stage-time" id="stage-4-time">—</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-4"></div>
+                    <div class="pipeline-stage">
+                        <div class="stage-dot" id="stage-5">✅</div>
+                        <div class="stage-label">Validation</div>
+                        <div class="stage-time" id="stage-5-time">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Zone -->
+        <div class="card mt-20">
+            <div class="card-header">
+                <h3>📎 Upload Insurance Plan PDF</h3>
+                <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-secondary)">
+                    <input type="checkbox" id="skip-review" checked> Skip review (auto-generate bundle)
+                </label>
+            </div>
+            <div class="card-body">
+                <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+                    <input type="file" id="file-input" accept=".pdf" style="display:none" onchange="handleFileSelect(event)">
+                    <div class="upload-icon" id="upload-icon">📄</div>
+                    <div class="upload-title" id="upload-title">Drop your insurance plan PDF here</div>
+                    <div class="upload-desc" id="upload-desc">
+                        Supports Bajaj Allianz, Star Health, ICICI Lombard, Niva Bupa, Care Health, HDFC Ergo, 
+                        and all IRDAI-registered health insurance plan documents
+                    </div>
+                    <div class="upload-formats">PDF • Max 50 MB • Digital or Scanned • Hindi + English</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="results-panel" id="results-panel">
+            
+            <!-- Extracted Data Summary -->
+            <div class="grid-2 mt-20">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📋 Extracted Plan Data</h3>
+                        <button class="btn btn-sm btn-outline" onclick="downloadExtracted()">Export JSON</button>
+                    </div>
+                    <div class="card-body" id="extracted-summary" style="max-height:400px;overflow-y:auto">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔥 FHIR Bundle Preview</h3>
+                        <button class="btn btn-sm btn-teal" id="download-btn" onclick="downloadBundle()" disabled>Download Bundle</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-block" id="fhir-preview" style="max-height:400px;overflow-y:auto">
+                            <span class="bracket">// FHIR bundle will appear here after conversion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation Results -->
+            <div class="card mt-20">
+                <div class="card-header">
+                    <h3>🔍 NRCeS Profile Validation</h3>
+                    <div id="validation-summary"></div>
+                </div>
+                <div class="card-body" id="validation-results">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="card mt-20">
+            <div class="card-header">
+                <h3>📝 Activity Log</h3>
+                <button class="btn btn-sm btn-outline" onclick="clearLog()">Clear</button>
+            </div>
+            <div class="card-body">
+                <div class="log-viewer" id="activity-log">
+                    <div class="log-entry"><span class="timestamp">[System]</span> <span class="level-info">NHCX Converter ready. Upload a PDF to begin.</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TAB 2: SECURITY ═══ -->
+    <div id="tab-security" class="tab-content">
+        
+        <!-- Security Overview Metrics -->
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Encryption</div>
+                <div class="metric-value" style="color:var(--green-success);font-size:22px">AES-256</div>
+                <div class="metric-sub">GCM mode, at-rest encryption</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Authentication</div>
+                <div class="metric-value" style="color:var(--teal);font-size:22px">API Key</div>
+                <div class="metric-sub">Role-based access control</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Audit Events</div>
+                <div class="metric-value" id="audit-count">0</div>
+                <div class="metric-sub">Immutable trail (today)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Data Retention</div>
+                <div class="metric-value" style="font-size:22px">Auto-purge</div>
+                <div class="metric-sub">24h uploads, 7d bundles</div>
+            </div>
+        </div>
+
+        <!-- Compliance Frameworks -->
+        <h3 style="font-size:15px;font-weight:700;margin:24px 0 16px;color:var(--navy)">Regulatory Compliance Alignment</h3>
+        <div class="grid-2">
+            <div class="compliance-card">
+                <div class="compliance-header">
+                    <h4>🇮🇳 DPDP Act, 2023</h4>
+                    <span class="status-pill success">Implemented</span>
+                </div>
+                <ul class="compliance-controls">
+                    <li>Data minimization — extracts only required insurance plan fields</li>
+                    <li>Purpose limitation — insurance plan conversion only</li>
+                    <li>Retention controls — auto-purge after configurable period</li>
+                    <li>Right to erasure — DELETE endpoint for job data removal</li>
+                    <li>Encryption at rest — AES-256-GCM for all PHI/PII files</li>
+                    <li>Audit trail — immutable structured event logging</li>
+                </ul>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-header">
+                    <h4>🏥 HIPAA Security Rule</h4>
+                    <span class="status-pill success">Implemented</span>
+                </div>
+                <ul class="compliance-controls">
+                    <li>Access controls — API key + role-based permissions</li>
+                    <li>Audit controls — structured HIPAA audit events</li>
+                    <li>Integrity controls — SHA-256 hash verification</li>
+                    <li>Transmission security — HTTPS enforcement headers</li>
+                    <li>Encryption standard — AES-256-GCM</li>
+                    <li>Automatic session management</li>
+                </ul>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-header">
+                    <h4>🏛️ ABDM Health Data Policy</h4>
+                    <span class="status-pill success">Aligned</span>
+                </div>
+                <ul class="compliance-controls">
+                    <li>FHIR R4 standard compliance (HL7)</li>
+                    <li>NRCeS NHCX profile validation (v6.5.0)</li>
+                    <li>Health data categorization with PHI tagging</li>
+                    <li>Data portability via FHIR bundle export</li>
+                    <li>Indian insurance domain ontology mapping</li>
+                </ul>
+            </div>
+            <div class="compliance-card">
+                <div class="compliance-header">
+                    <h4>📜 ISO 27001 / 27799</h4>
+                    <span class="status-pill warning">Partial</span>
+                </div>
+                <ul class="compliance-controls">
+                    <li>Information security policy implemented</li>
+                    <li>Asset management with data classification</li>
+                    <li>Access control with role-based permissions</li>
+                    <li>Cryptographic controls (AES-256)</li>
+                    <li>Operations security with logging & monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Security Controls Detail -->
+        <h3 style="font-size:15px;font-weight:700;margin:24px 0 16px;color:var(--navy)">Active Security Controls</h3>
+        <div class="security-grid">
+            <div class="security-item">
+                <div class="security-icon green">🔐</div>
+                <div class="security-info">
+                    <h4>AES-256-GCM Encryption</h4>
+                    <p>All extracted PHI/PII data encrypted at rest. Keys managed via environment variables (production: AWS KMS / Azure Key Vault).</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <div class="security-icon blue">📋</div>
+                <div class="security-info">
+                    <h4>Immutable Audit Trail</h4>
+                    <p>Every data access, conversion, and download logged with who/what/when/where. Tamper-detected via SHA-256 integrity hashes.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <div class="security-icon green">🔑</div>
+                <div class="security-info">
+                    <h4>API Key Authentication</h4>
+                    <p>X-API-Key header authentication with 4 role levels: admin, reviewer, api, readonly. Demo mode available for hackathon testing.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <div class="security-icon amber">⏱️</div>
+                <div class="security-info">
+                    <h4>Rate Limiting</h4>
+                    <p>30 requests/minute per client. Token-bucket algorithm prevents abuse while allowing burst traffic for legitimate use.</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <div class="security-icon green">🗑️</div>
+                <div class="security-info">
+                    <h4>Secure Data Deletion</h4>
+                    <p>DoD 5220.22-M secure deletion — files overwritten with random data before removal. Auto-purge for expired data (DPDP compliance).</p>
+                </div>
+            </div>
+            <div class="security-item">
+                <div class="security-icon blue">🛡️</div>
+                <div class="security-info">
+                    <h4>PHI/PII Masking in Logs</h4>
+                    <p>Aadhaar, PAN, phone numbers, emails, and policy numbers automatically masked in all log output. No PHI in plaintext logs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TAB 3: QUALITY METRICS ═══ -->
+    <div id="tab-quality" class="tab-content">
+        <div class="grid-4">
+            <div class="metric-card">
+                <div class="metric-label">Extraction Confidence</div>
+                <div class="metric-value" id="confidence-score" style="color:var(--green-success)">—</div>
+                <div class="metric-sub">LLM self-reported accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Fields Populated</div>
+                <div class="metric-value" id="fields-populated">—</div>
+                <div class="metric-sub" id="fields-total">out of 30+ schema fields</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">FHIR Validation</div>
+                <div class="metric-value" id="validation-score" style="color:var(--green-success)">—</div>
+                <div class="metric-sub">NRCeS profile compliance</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Processing Time</div>
+                <div class="metric-value" id="processing-time">—</div>
+                <div class="metric-sub">End-to-end pipeline</div>
+            </div>
+        </div>
+
+        <!-- Quality Breakdown -->
+        <div class="grid-2 mt-24">
+            <div class="card">
+                <div class="card-header"><h3>📊 Field Coverage Analysis</h3></div>
+                <div class="card-body" id="field-coverage">
+                    <p style="color:var(--text-muted);font-size:13px">Upload a PDF to see field-by-field extraction quality analysis.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>⚠️ Extraction Warnings</h3></div>
+                <div class="card-body" id="extraction-warnings">
+                    <p style="color:var(--text-muted);font-size:13px">Warnings about ambiguous or missing data will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TAB 4: API EXPLORER ═══ -->
+    <div id="tab-api" class="tab-content">
+        <div class="card">
+            <div class="card-header">
+                <h3>⚡ API Endpoints</h3>
+                <a href="/docs" target="_blank" class="btn btn-sm btn-outline">Open Swagger UI →</a>
+            </div>
+            <div class="card-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Auth Required</th>
+                            <th>PHI Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="status-pill success">POST</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/convert</td>
+                            <td>Upload PDF, extract insurance plan data</td>
+                            <td>api, reviewer, admin</td>
+                            <td><span class="status-pill warning">PHI</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill info">GET</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/jobs/{job_id}</td>
+                            <td>Check conversion job status</td>
+                            <td>api, reviewer, admin</td>
+                            <td><span class="status-pill warning">PHI</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill success">POST</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/review/{job_id}</td>
+                            <td>Submit human review corrections</td>
+                            <td>reviewer, admin</td>
+                            <td><span class="status-pill warning">PHI</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill info">GET</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/download/{job_id}</td>
+                            <td>Download FHIR InsurancePlan bundle</td>
+                            <td>api, reviewer, admin</td>
+                            <td><span class="status-pill warning">PHI</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill success">POST</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/validate</td>
+                            <td>Validate FHIR bundle against NRCeS profiles</td>
+                            <td>api, reviewer, admin</td>
+                            <td><span class="status-pill info">Internal</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill info">GET</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/mappings</td>
+                            <td>List available mapping configurations</td>
+                            <td>All roles</td>
+                            <td><span class="status-pill" style="background:#F3F4F6;color:#6B7280">Public</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill info">GET</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/security/status</td>
+                            <td>Security & compliance dashboard data</td>
+                            <td>admin</td>
+                            <td><span class="status-pill info">Internal</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-pill error">DELETE</span></td>
+                            <td style="font-family:'JetBrains Mono';font-size:12px">/api/v1/jobs/{job_id}</td>
+                            <td>Right to Erasure — delete all job data</td>
+                            <td>admin</td>
+                            <td><span class="status-pill warning">PHI</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+    NHCX Insurance Plan → FHIR Bundle Converter v1.0.0 · Built for <a href="#">NHA Hackathon 2026</a> · 
+    Problem Statement 03 · Ayushman Bharat Digital Mission (ABDM) · 
+    Compliant with DPDP Act 2023, HIPAA, ABDM Health Data Policy
+</footer>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+const API_BASE = '/api/v1';
+let currentJobId = null;
+let currentResult = null;
+let startTime = null;
+
+// ── Tab Switching ──
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    event.target.closest('.tab-btn').classList.add('active');
+}
+
+// ── Drag & Drop ──
+const uploadZone = document.getElementById('upload-zone');
+['dragenter', 'dragover'].forEach(e => {
+    uploadZone.addEventListener(e, ev => { ev.preventDefault(); uploadZone.classList.add('dragover'); });
+});
+['dragleave', 'drop'].forEach(e => {
+    uploadZone.addEventListener(e, ev => { ev.preventDefault(); uploadZone.classList.remove('dragover'); });
+});
+uploadZone.addEventListener('drop', ev => {
+    const file = ev.dataTransfer.files[0];
+    if (file && file.name.toLowerCase().endsWith('.pdf')) processFile(file);
+});
+
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) processFile(file);
+}
+
+// ── File Processing ──
+async function processFile(file) {
+    startTime = Date.now();
+    const skipReview = document.getElementById('skip-review').checked;
+    
+    // Update UI
+    uploadZone.classList.add('processing');
+    document.getElementById('upload-icon').textContent = '⏳';
+    document.getElementById('upload-title').textContent = 'Processing: ' + file.name;
+    document.getElementById('upload-desc').textContent = `Size: ${(file.size/1024/1024).toFixed(1)} MB · Extracting text & analyzing with AI...`;
+    
+    updateStage(1, 'active');
+    addLog('info', `Uploading ${file.name} (${(file.size/1024/1024).toFixed(1)} MB)...`);
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('skip_review', skipReview.toString());
+
+    try {
+        updateStage(1, 'complete', ((Date.now() - startTime)/1000).toFixed(1) + 's');
+        updateStage(2, 'active');
+        addLog('info', 'PDF uploaded. Starting text extraction...');
+
+        const response = await fetch(API_BASE + '/convert', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const result = await response.json();
+        currentResult = result;
+        currentJobId = result.job_id;
+
+        if (response.ok) {
+            const totalTime = ((Date.now() - startTime)/1000).toFixed(1);
+            
+            // Mark all stages complete
+            for (let i = 2; i <= 5; i++) {
+                updateStage(i, 'complete');
+            }
+
+            uploadZone.classList.remove('processing');
+            uploadZone.classList.add('success');
+            document.getElementById('upload-icon').textContent = '✅';
+            document.getElementById('upload-title').textContent = 'Conversion Complete!';
+            document.getElementById('upload-desc').textContent = `Job ${result.job_id} · Plan: ${result.extracted_plan?.plan_name || 'Unknown'} · ${totalTime}s`;
+
+            document.getElementById('pipeline-status').className = 'status-pill success';
+            document.getElementById('pipeline-status').textContent = result.status === 'completed' ? 'Completed' : 'Review Required';
+
+            addLog('success', `Pipeline complete in ${totalTime}s. Plan: "${result.extracted_plan?.plan_name}"`);
+            addLog('success', `Insurer: ${result.extracted_plan?.insurer_name} · Coverages: ${result.extracted_plan?.coverages?.length || 0} · Exclusions: ${result.extracted_plan?.exclusions?.length || 0}`);
+
+            // Populate results
+            showResults(result);
+            updateQualityMetrics(result, totalTime);
+
+            if (result.status === 'completed') {
+                document.getElementById('download-btn').disabled = false;
+            }
+        } else {
+            throw new Error(result.detail || result.message || 'Conversion failed');
+        }
+    } catch (error) {
+        uploadZone.classList.remove('processing');
+        document.getElementById('upload-icon').textContent = '❌';
+        document.getElementById('upload-title').textContent = 'Conversion Failed';
+        document.getElementById('upload-desc').textContent = error.message;
+        document.getElementById('pipeline-status').className = 'status-pill error';
+        document.getElementById('pipeline-status').textContent = 'Failed';
+        addLog('error', 'Error: ' + error.message);
+    }
+}
+
+// ── Pipeline Visualization ──
+function updateStage(num, state, time) {
+    const dot = document.getElementById('stage-' + num);
+    dot.className = 'stage-dot ' + state;
+    if (time) document.getElementById('stage-' + num + '-time').textContent = time;
+    if (num > 1 && (state === 'complete' || state === 'active')) {
+        document.getElementById('conn-' + (num-1)).classList.add('complete');
+    }
+}
+
+// ── Results Display ──
+function showResults(result) {
+    document.getElementById('results-panel').classList.add('visible');
+    const plan = result.extracted_plan;
+    
+    if (plan) {
+        let html = '<table class="data-table"><thead><tr><th>Field</th><th>Value</th><th>Status</th></tr></thead><tbody>';
+        const fields = [
+            ['Plan Name', plan.plan_name],
+            ['Plan Identifier (UIN)', plan.plan_identifier],
+            ['Plan Type', plan.plan_type],
+            ['Insurer', plan.insurer_name],
+            ['IRDAI Registration', plan.insurer_irdai_registration],
+            ['Status', plan.status],
+            ['Coverage Areas', plan.coverage_areas?.join(', ')],
+            ['Coverages', plan.coverages?.length + ' types'],
+            ['Exclusions', plan.exclusions?.length + ' items'],
+            ['Plan Costs', plan.plan_costs?.length + ' variants'],
+            ['Waiting Period (Initial)', plan.initial_waiting_period_days ? plan.initial_waiting_period_days + ' days' : null],
+            ['PED Waiting', plan.pre_existing_disease_waiting_days ? plan.pre_existing_disease_waiting_days + ' days' : null],
+            ['Confidence', plan.extraction_confidence ? (plan.extraction_confidence * 100).toFixed(0) + '%' : null],
+        ];
+        
+        fields.forEach(([name, value]) => {
+            const status = value && value !== 'null' && value !== '0 types' && value !== '0 items' && value !== '0 variants'
+                ? '<span class="status-pill success">✓</span>' 
+                : '<span class="status-pill warning">Missing</span>';
+            html += `<tr><td style="font-weight:600">${name}</td><td>${value || '—'}</td><td>${status}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('extracted-summary').innerHTML = html;
+    }
+
+    // FHIR Bundle preview
+    if (result.fhir_bundle) {
+        const json = JSON.stringify(result.fhir_bundle, null, 2);
+        document.getElementById('fhir-preview').textContent = json.substring(0, 3000) + (json.length > 3000 ? '\n\n... (truncated for display)' : '');
+    }
+
+    // Validation results
+    if (result.validation_errors) {
+        const errors = result.validation_errors.filter(e => e.severity === 'error').length;
+        const warnings = result.validation_errors.filter(e => e.severity === 'warning').length;
+        document.getElementById('validation-summary').innerHTML = 
+            `<span class="status-pill ${errors === 0 ? 'success' : 'error'}">${errors} errors</span> ` +
+            `<span class="status-pill warning">${warnings} warnings</span>`;
+
+        if (result.validation_errors.length > 0) {
+            let vhtml = '<table class="data-table"><thead><tr><th>Severity</th><th>Location</th><th>Message</th></tr></thead><tbody>';
+            result.validation_errors.forEach(e => {
+                const cls = e.severity === 'error' ? 'error' : 'warning';
+                vhtml += `<tr><td><span class="status-pill ${cls}">${e.severity}</span></td><td style="font-family:'JetBrains Mono';font-size:11px">${e.location}</td><td>${e.message}</td></tr>`;
+            });
+            vhtml += '</tbody></table>';
+            document.getElementById('validation-results').innerHTML = vhtml;
+        } else {
+            document.getElementById('validation-results').innerHTML = '<p style="color:var(--green-success);font-weight:600">✅ Bundle passes all NRCeS NHCX profile validation checks.</p>';
+        }
+    }
+}
+
+// ── Quality Metrics ──
+function updateQualityMetrics(result, totalTime) {
+    const plan = result.extracted_plan;
+    if (!plan) return;
+
+    document.getElementById('confidence-score').textContent = plan.extraction_confidence ? (plan.extraction_confidence * 100).toFixed(0) + '%' : '—';
+    document.getElementById('processing-time').textContent = totalTime + 's';
+
+    // Count populated fields
+    const allFields = ['plan_name','plan_identifier','plan_type','insurer_name','insurer_irdai_registration',
+        'tpa_name','effective_from','effective_to','contact_phone','contact_email','contact_website',
+        'initial_waiting_period_days','pre_existing_disease_waiting_days','specific_disease_waiting_days',
+        'network_hospital_count','extraction_confidence'];
+    const populated = allFields.filter(f => plan[f] !== null && plan[f] !== undefined && plan[f] !== '').length;
+    const listFields = (plan.coverages?.length || 0) + (plan.exclusions?.length || 0) + (plan.plan_costs?.length || 0) + (plan.coverage_areas?.length || 0);
+    document.getElementById('fields-populated').textContent = (populated + Math.min(listFields, 14)) + '/30';
+    
+    // Validation score
+    if (result.validation_errors) {
+        const errors = result.validation_errors.filter(e => e.severity === 'error').length;
+        document.getElementById('validation-score').textContent = errors === 0 ? 'PASS' : errors + ' errors';
+        document.getElementById('validation-score').style.color = errors === 0 ? 'var(--green-success)' : 'var(--red-error)';
+    }
+
+    // Field coverage analysis
+    let coverageHtml = '<table class="data-table"><thead><tr><th>Category</th><th>Count</th><th>Quality</th></tr></thead><tbody>';
+    coverageHtml += `<tr><td>Identity Fields</td><td>${populated}/16</td><td><span class="status-pill ${populated > 8 ? 'success' : 'warning'}">${populated > 8 ? 'Good' : 'Partial'}</span></td></tr>`;
+    coverageHtml += `<tr><td>Coverages</td><td>${plan.coverages?.length || 0}</td><td><span class="status-pill ${(plan.coverages?.length || 0) > 3 ? 'success' : 'warning'}">${(plan.coverages?.length || 0) > 3 ? 'Comprehensive' : 'Partial'}</span></td></tr>`;
+    coverageHtml += `<tr><td>Benefits (total)</td><td>${plan.coverages?.reduce((s,c) => s + (c.benefits?.length || 0), 0) || 0}</td><td><span class="status-pill info">Extracted</span></td></tr>`;
+    coverageHtml += `<tr><td>Exclusions</td><td>${plan.exclusions?.length || 0}</td><td><span class="status-pill ${(plan.exclusions?.length || 0) > 3 ? 'success' : 'warning'}">${(plan.exclusions?.length || 0) > 3 ? 'Detailed' : 'Partial'}</span></td></tr>`;
+    coverageHtml += `<tr><td>Plan Cost Variants</td><td>${plan.plan_costs?.length || 0}</td><td><span class="status-pill info">Extracted</span></td></tr>`;
+    coverageHtml += '</tbody></table>';
+    document.getElementById('field-coverage').innerHTML = coverageHtml;
+
+    // Warnings
+    if (plan.extraction_warnings?.length > 0) {
+        let warnHtml = '<ul style="list-style:none;display:flex;flex-direction:column;gap:8px">';
+        plan.extraction_warnings.forEach(w => {
+            warnHtml += `<li style="padding:8px 12px;background:#FEF3C7;border-radius:6px;font-size:12px;color:#92400E">⚠️ ${w}</li>`;
+        });
+        warnHtml += '</ul>';
+        document.getElementById('extraction-warnings').innerHTML = warnHtml;
+    }
+}
+
+// ── Download ──
+async function downloadBundle() {
+    if (!currentJobId) return;
+    window.open(API_BASE + '/download/' + currentJobId, '_blank');
+}
+
+function downloadExtracted() {
+    if (!currentResult?.extracted_plan) return;
+    const blob = new Blob([JSON.stringify(currentResult.extracted_plan, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${currentJobId}_extracted_plan.json`;
+    a.click();
+}
+
+// ── Activity Log ──
+function addLog(level, message) {
+    const log = document.getElementById('activity-log');
+    const time = new Date().toLocaleTimeString('en-IN', {hour12: false});
+    const cls = level === 'error' ? 'level-error' : level === 'success' ? 'level-success' : level === 'warn' ? 'level-warn' : 'level-info';
+    log.innerHTML += `<div class="log-entry"><span class="timestamp">[${time}]</span> <span class="${cls}">${message}</span></div>`;
+    log.scrollTop = log.scrollHeight;
+}
+
+function clearLog() {
+    document.getElementById('activity-log').innerHTML = '<div class="log-entry"><span class="timestamp">[System]</span> <span class="level-info">Log cleared.</span></div>';
+}
+</script>
+</body>
+</html>

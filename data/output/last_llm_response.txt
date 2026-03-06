@@ -1,0 +1,368 @@
+=== RAW LLM RESPONSE ===
+{
+  "plan_name": "Global Health Care",
+  "plan_aliases": [],
+  "plan_identifier": "BAJHLIP23020V012223",
+  "plan_type": "individual",
+  "status": "active",
+  "insurer_name": "Bajaj Allianz General Insurance Company Limited",
+  "insurer_irdai_registration": "113",
+  "tpa_name": null,
+  "effective_from": null,
+  "effective_to": null,
+  "coverage_areas": ["India"],
+  "coverages": [
+    {
+      "coverage_type": "inpatient",
+      "description": "In-patient Hospitalization Treatment",
+      "benefits": [
+        {
+          "name": "In-patient Hospitalization Treatment",
+          "benefit_type": null,
+          "description": "Covers reasonable and customary medical expenses incurred during hospitalization due to illness or accidental injury.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Room rent and boarding expenses",
+              "value": null,
+              "percentage": null,
+              "unit": "INR",
+              "condition": "No sub-limit"
+            },
+            {
+              "description": "ICU expenses",
+              "value": null,
+              "percentage": null,
+              "unit": "INR",
+              "condition": "Actual ICU expenses covered"
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "pre-hospitalization",
+      "description": "Pre-Hospitalization Medical Expenses",
+      "benefits": [
+        {
+          "name": "Pre-Hospitalization",
+          "benefit_type": null,
+          "description": "Covers medical expenses incurred during the 60 days immediately before hospitalization.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "post-hospitalization",
+      "description": "Post-Hospitalization Medical Expenses",
+      "benefits": [
+        {
+          "name": "Post-Hospitalization",
+          "benefit_type": null,
+          "description": "Covers medical expenses incurred during the 180 days immediately after discharge from hospitalization.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "ambulance",
+      "description": "Local (Road) Ambulance",
+      "benefits": [
+        {
+          "name": "Ambulance Charges",
+          "benefit_type": null,
+          "description": "Covers reasonable costs incurred on ambulance services for transferring to the nearest hospital.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "daycare",
+      "description": "Day Care Procedures",
+      "benefits": [
+        {
+          "name": "Day Care Procedures",
+          "benefit_type": null,
+          "description": "Covers medical expenses for day care procedures taken as an inpatient.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "living-donor",
+      "description": "Living Donor Medical Costs",
+      "benefits": [
+        {
+          "name": "Living Donor Expenses",
+          "benefit_type": null,
+          "description": "Covers expenses for organ donor’s treatment for harvesting the donated organ.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Living Donor Medical Costs",
+              "value": 500000,
+              "percentage": null,
+              "unit": "INR",
+              "condition": null
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "preventive",
+      "description": "Annual Preventive Health Check-up",
+      "benefits": [
+        {
+          "name": "Preventive Health Check-up",
+          "benefit_type": null,
+          "description": "Covers annual preventive health check-up after each renewal.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Annual Preventive Health Check-up",
+              "value": 5000,
+              "percentage": null,
+              "unit": "INR",
+              "condition": "Only offered at renewal"
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "ayush",
+      "description": "Ayurvedic / Homeopathic Hospitalization Expenses",
+      "benefits": [
+        {
+          "name": "Ayurvedic / Homeopathic Treatment",
+          "benefit_type": null,
+          "description": "Covers medical expenses for Ayurvedic and Homeopathic treatment.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "air-ambulance",
+      "description": "Air Ambulance",
+      "benefits": [
+        {
+          "name": "Air Ambulance Charges",
+          "benefit_type": null,
+          "description": "Covers ambulance transportation in an airplane or helicopter for emergency conditions.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Air Ambulance",
+              "value": 500000,
+              "percentage": null,
+              "unit": "INR",
+              "condition": null
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "mental-illness",
+      "description": "Mental Illness Treatment",
+      "benefits": [
+        {
+          "name": "Mental Illness Treatment",
+          "benefit_type": null,
+          "description": "Covers expenses for inpatient treatment of mental illness.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "rehabilitation",
+      "description": "Rehabilitation",
+      "benefits": [
+        {
+          "name": "Rehabilitation Treatment",
+          "benefit_type": null,
+          "description": "Covers inpatient rehabilitation treatment.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "modern-treatment",
+      "description": "Modern Treatment Methods and Advancement in Technologies",
+      "benefits": [
+        {
+          "name": "Modern Treatment Methods",
+          "benefit_type": null,
+          "description": "Covers expenses for modern treatment methods.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    }
+  ],
+  "plan_costs": [
+    {
+      "sum_insured": 3750000,
+      "premium": null,
+      "copay_percentage": null,
+      "deductible": null,
+      "age_band": "18-35",
+      "plan_variant": "Imperial"
+    },
+    {
+      "sum_insured": 5600000,
+      "premium": null,
+      "copay_percentage": null,
+      "deductible": null,
+      "age_band": "36-45",
+      "plan_variant": "Imperial Plus"
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Pre-Existing Diseases",
+      "description": "Expenses related to treatment of pre-existing diseases and its complications until 36 months of continuous coverage.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 1095
+    },
+    {
+      "name": "Specified Disease/Procedure Waiting Period",
+      "description": "Expenses related to treatment of specified diseases until 24 months of continuous coverage.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 730
+    },
+    {
+      "name": "30-Day Waiting Period",
+      "description": "Expenses related to treatment of any illness within 30 days from the first policy commencement date.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 30
+    },
+    {
+      "name": "Investigation & Evaluation",
+      "description": "Expenses related to any admission primarily for diagnostics and evaluation purposes only.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Rest Cure, Rehabilitation and Respite Care",
+      "description": "Expenses related to any admission primarily for enforced bed rest and not for receiving treatment.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Obesity/Weight Control",
+      "description": "Expenses related to surgical treatment of obesity that does not meet specified conditions.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Change-of-Gender Treatments",
+      "description": "Expenses related to any treatment to change characteristics of the body to those of the opposite sex.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Cosmetic or Plastic Surgery",
+      "description": "Expenses for cosmetic or plastic surgery unless for reconstruction following an accident.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Hazardous or Adventure Sports",
+      "description": "Expenses related to treatment necessitated due to participation in hazardous or adventure sports.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Alcoholism and Substance Abuse",
+      "description": "Expenses for treatment related to alcoholism, drug or substance abuse.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Maternity",
+      "description": "Expenses related to childbirth and lawful medical termination of pregnancy.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    }
+  ],
+  "initial_waiting_period_days": 30,
+  "pre_existing_disease_waiting_days": 1095,
+  "specific_disease_waiting_days": 730,
+  "contact_phone": "1800 209 0144",
+  "contact_email": "bagichelp@bajajallianz.co.in",
+  "contact_website": "www.bajajallianz.com",
+  "network_hospital_count": null,
+  "extraction_confidence": 0.95,
+  "extraction_warnings": []
+}
+
+=== END ===

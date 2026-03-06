@@ -1,0 +1,393 @@
+{
+  "resourceType": "Bundle",
+  "id": "sample-insurance-plan-bundle",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-02-25T10:00:00.000+00:00",
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlanBundle"
+    ]
+  },
+  "type": "collection",
+  "timestamp": "2026-02-25T10:00:00.000+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:ip-001",
+      "resource": {
+        "resourceType": "InsurancePlan",
+        "id": "ip-001",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlan"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Cosmetic or plastic surgery unless necessitated by injury or as part of medically necessary treatment"
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "waiting-period"
+              },
+              {
+                "url": "description",
+                "valueString": "Pre-existing diseases"
+              },
+              {
+                "url": "waitingPeriod",
+                "valueDuration": {
+                  "value": 1095,
+                  "unit": "days",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://nrces.in/ndhm/fhir/r4/identifier/insurance-plan",
+            "value": "IRDAN125P0030V01202425"
+          }
+        ],
+        "status": "active",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-insuranceplan-type",
+                "code": "FMLY",
+                "display": "Family Floater"
+              }
+            ],
+            "text": "Family Floater Health Insurance"
+          }
+        ],
+        "name": "Active Assure Diamond",
+        "alias": [
+          "Arogya Sanjeevani Plus"
+        ],
+        "period": {
+          "start": "2025-04-01",
+          "end": "2026-03-31"
+        },
+        "ownedBy": {
+          "reference": "Organization/org-insurer-001"
+        },
+        "administeredBy": {
+          "reference": "Organization/org-tpa-001"
+        },
+        "coverageArea": [
+          {
+            "display": "India"
+          }
+        ],
+        "contact": [
+          {
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "1800-425-2255"
+              },
+              {
+                "system": "email",
+                "value": "customercare@example-insurance.co.in"
+              }
+            ]
+          }
+        ],
+        "coverage": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "IPH",
+                  "display": "In-Patient Hospitalization"
+                }
+              ],
+              "text": "In-Patient Hospitalization"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [
+                    {
+                      "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-benefit-type",
+                      "code": "room-rent",
+                      "display": "Room Rent"
+                    }
+                  ],
+                  "text": "Room Rent / Boarding Expenses"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 5000,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Per day limit for single private AC room"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "text": "ICU / ICCU Charges"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 10000,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Per day ICU limit"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "text": "Pre-Hospitalization Expenses"
+                },
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Expenses incurred up to 60 days prior to hospitalization"
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "text": "Post-Hospitalization Expenses"
+                },
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Expenses incurred up to 180 days after discharge"
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "text": "Ambulance Charges"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 3000,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Per hospitalization"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "DC",
+                  "display": "Day Care"
+                }
+              ],
+              "text": "Day Care Procedures"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "text": "Listed Day Care Procedures"
+                },
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Procedures requiring less than 24 hours hospitalization as per insurer's listed procedures"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "AYUSH",
+                  "display": "AYUSH Treatment"
+                }
+              ],
+              "text": "AYUSH Treatment (Ayurveda, Yoga, Unani, Siddha, Homeopathy)"
+            },
+            "benefit": [
+              {
+                "type": {
+                  "text": "AYUSH Inpatient Treatment"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 25000,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Per policy year for AYUSH treatment"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "plan": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "silver",
+                  "display": "Silver"
+                }
+              ],
+              "text": "Silver Plan"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 500000,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ],
+            "specificCost": [
+              {
+                "category": {
+                  "text": "Annual Premium (Age 25-35)"
+                },
+                "benefit": [
+                  {
+                    "type": {
+                      "text": "Annual Premium"
+                    },
+                    "cost": [
+                      {
+                        "type": {
+                          "text": "premium"
+                        },
+                        "value": {
+                          "value": 8500,
+                          "unit": "INR",
+                          "system": "urn:iso:std:iso:4217",
+                          "code": "INR"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "gold",
+                  "display": "Gold"
+                }
+              ],
+              "text": "Gold Plan"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 1000000,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:org-insurer-001",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-insurer-001",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://irdai.gov.in/registration",
+            "value": "IRDAI/HLT/XXX/2006/001"
+          }
+        ],
+        "name": "Sample Health Insurance Co. Ltd.",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "1800-425-2255"
+          },
+          {
+            "system": "email",
+            "value": "customercare@example-insurance.co.in"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:org-tpa-001",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-tpa-001",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"
+          ]
+        },
+        "name": "Sample TPA Services Pvt. Ltd."
+      }
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "resourceType": "Bundle",
+  "id": "c0d7e006-b5fe-4a82-b216-ba070b4efdc5",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-02-27T14:29:10.000+00:00",
+    "profile": [
+      "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlanBundle"
+    ]
+  },
+  "type": "collection",
+  "timestamp": "2026-02-27T14:29:10.000+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:398a31d2-4845-4047-8c46-2f523befcab9",
+      "resource": {
+        "resourceType": "InsurancePlan",
+        "id": "398a31d2-4845-4047-8c46-2f523befcab9",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/InsurancePlan"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://nrces.in/ndhm/fhir/r4/identifier/insurance-plan",
+            "value": "BAJHLIA22169V012122"
+          }
+        ],
+        "status": "active",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-insuranceplan-type",
+                "code": "OTH",
+                "display": "Other"
+              }
+            ],
+            "text": "individual | family-floater"
+          }
+        ],
+        "name": "HEALTH PRIME",
+        "period": {
+          "start": "2026-02-27"
+        },
+        "ownedBy": {
+          "reference": "Organization/5b853397-bf1e-42f2-b6e0-36ce41411f31"
+        },
+        "coverageArea": [
+          {
+            "display": "India"
+          }
+        ],
+        "contact": [
+          {
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "1800 209 0144"
+              },
+              {
+                "system": "email",
+                "value": "bagichelp@bajajallianz.co.in"
+              },
+              {
+                "system": "url",
+                "value": "www.bajajallianz.com"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Tele consultation outside the digital platform is not covered."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Other expenses related to investigations, medicines, or procedures are not covered."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "If the investigation cover is not availed in the respective policy year, it cannot be carried forward."
+              }
+            ]
+          },
+          {
+            "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Exclusion",
+            "extension": [
+              {
+                "url": "exclusionType",
+                "valueString": "permanent"
+              },
+              {
+                "url": "description",
+                "valueString": "Preventive health check-up cannot be availed outside the prescribed list of hospitals."
+              }
+            ]
+          }
+        ],
+        "coverage": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-coverage-type",
+                  "code": "DC",
+                  "display": "Day Care"
+                }
+              ],
+              "text": "Coverage for various medical consultations and investigations."
+            },
+            "benefit": [
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Tele Consultation Cover"
+                },
+                "limit": [
+                  {
+                    "code": {
+                      "text": "Tele Consultation Limit"
+                    }
+                  }
+                ],
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Initial waiting period for illness during the first year of Rider Period."
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Investigations Cover \u2013 Pathology & Radiology Expenses"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 15000.0,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Limit for Investigations"
+                    }
+                  }
+                ],
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Initial waiting period for investigations related to illness during the first year of Rider."
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Doctor Consultation Cover"
+                },
+                "limit": [
+                  {
+                    "value": {
+                      "value": 3000.0,
+                      "unit": "INR",
+                      "system": "urn:iso:std:iso:4217",
+                      "code": "INR"
+                    },
+                    "code": {
+                      "text": "Limit for Doctor Consultation"
+                    }
+                  }
+                ],
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Initial waiting period for consultation required for illness during the first year of this Rider."
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "coding": [],
+                  "text": "Annual Preventive Health Check-up Cover"
+                },
+                "limit": [
+                  {
+                    "code": {
+                      "text": "Preventive Health Check-up Limit"
+                    }
+                  }
+                ],
+                "extension": [
+                  {
+                    "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                    "valueString": "Health check-up must be availed within the Rider Period."
+                  }
+                ]
+              }
+            ],
+            "extension": [
+              {
+                "url": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Claim-Condition",
+                "valueString": "Coverage is subject to the terms and conditions of the Base Policy."
+              }
+            ]
+          }
+        ],
+        "plan": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "option-1",
+                  "display": "Option 1"
+                }
+              ],
+              "text": "Option 1"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 500000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "option-2",
+                  "display": "Option 2"
+                }
+              ],
+              "text": "Option 2"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 1000000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "option-3",
+                  "display": "Option 3"
+                }
+              ],
+              "text": "Option 3"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 1500000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "option-4",
+                  "display": "Option 4"
+                }
+              ],
+              "text": "Option 4"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 2000000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          },
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "https://nrces.in/ndhm/fhir/r4/CodeSystem/ndhm-plan-type",
+                  "code": "option-5",
+                  "display": "Option 5"
+                }
+              ],
+              "text": "Option 5"
+            },
+            "generalCost": [
+              {
+                "type": {
+                  "text": "Sum Insured"
+                },
+                "cost": {
+                  "value": 2500000.0,
+                  "unit": "INR",
+                  "system": "urn:iso:std:iso:4217",
+                  "code": "INR"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5b853397-bf1e-42f2-b6e0-36ce41411f31",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "5b853397-bf1e-42f2-b6e0-36ce41411f31",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Organization"
+          ]
+        },
+        "name": "Bajaj Allianz General Insurance Co. Ltd.",
+        "identifier": [
+          {
+            "system": "https://irdai.gov.in/registration",
+            "value": "113"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "1800 209 0144"
+          },
+          {
+            "system": "email",
+            "value": "bagichelp@bajajallianz.co.in"
+          },
+          {
+            "system": "url",
+            "value": "www.bajajallianz.com"
+          }
+        ]
+      }
+    }
+  ]
+}

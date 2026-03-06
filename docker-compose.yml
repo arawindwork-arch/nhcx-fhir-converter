@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  nhcx-converter:
+    build: .
+    container_name: nhcx-insurance-plan-converter
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - LLM_MODEL=${LLM_MODEL:-gpt-4o}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - DEBUG=${DEBUG:-false}
+    volumes:
+      - ./data:/app/data
+      - ./app/mappings:/app/app/mappings
+    restart: unless-stopped

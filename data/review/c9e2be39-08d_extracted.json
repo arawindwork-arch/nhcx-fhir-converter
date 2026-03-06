@@ -1,0 +1,270 @@
+{
+  "plan_name": "Global Health Care",
+  "plan_aliases": [],
+  "plan_identifier": "BAJHLIP23020V012223",
+  "plan_type": "individual",
+  "status": "active",
+  "insurer_name": "Bajaj Allianz General Insurance Company Limited",
+  "insurer_irdai_registration": "113",
+  "tpa_name": null,
+  "effective_from": null,
+  "effective_to": null,
+  "coverage_areas": [
+    "India"
+  ],
+  "coverages": [
+    {
+      "coverage_type": "inpatient",
+      "description": "In-patient Hospitalization Treatment",
+      "benefits": [
+        {
+          "name": "In-patient Hospitalization Treatment",
+          "benefit_type": null,
+          "description": "Covers reasonable and customary medical expenses incurred during hospitalization due to illness or accidental injury.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Room rent and boarding expenses",
+              "value": null,
+              "percentage": null,
+              "unit": "INR",
+              "condition": "No sub-limit"
+            },
+            {
+              "description": "ICU expenses",
+              "value": null,
+              "percentage": null,
+              "unit": "INR",
+              "condition": "Actual ICU expenses covered"
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "pre-hospitalization",
+      "description": "Pre-Hospitalization Medical Expenses",
+      "benefits": [
+        {
+          "name": "Pre-Hospitalization",
+          "benefit_type": null,
+          "description": "Covers medical expenses incurred during the 60 days immediately before hospitalization.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "post-hospitalization",
+      "description": "Post-Hospitalization Medical Expenses",
+      "benefits": [
+        {
+          "name": "Post-Hospitalization",
+          "benefit_type": null,
+          "description": "Covers medical expenses incurred during the 180 days immediately after discharge from hospitalization.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "ambulance",
+      "description": "Local (Road) Ambulance",
+      "benefits": [
+        {
+          "name": "Ambulance Expenses",
+          "benefit_type": null,
+          "description": "Covers reasonable costs incurred on ambulance services for transferring to the nearest hospital.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "daycare",
+      "description": "Day Care Procedures",
+      "benefits": [
+        {
+          "name": "Day Care Procedures",
+          "benefit_type": null,
+          "description": "Covers medical expenses for day care procedures taken as an inpatient.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "living-donor",
+      "description": "Living Donor Medical Costs",
+      "benefits": [
+        {
+          "name": "Living Donor Expenses",
+          "benefit_type": null,
+          "description": "Covers expenses for organ donor's treatment for harvesting the donated organ.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Living Donor Medical Costs",
+              "value": 500000.0,
+              "percentage": null,
+              "unit": "INR",
+              "condition": null
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "maternity",
+      "description": "Maternity Expenses",
+      "benefits": [
+        {
+          "name": "Maternity Expenses",
+          "benefit_type": null,
+          "description": "Covers medical treatment expenses traceable to childbirth.",
+          "covered": false,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "mental-health",
+      "description": "Mental Illness Treatment",
+      "benefits": [
+        {
+          "name": "Mental Illness Treatment",
+          "benefit_type": null,
+          "description": "Covers inpatient treatment of mental illness in a recognized psychiatric unit.",
+          "covered": true,
+          "limits": [],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    },
+    {
+      "coverage_type": "rehabilitation",
+      "description": "Rehabilitation",
+      "benefits": [
+        {
+          "name": "Rehabilitation Expenses",
+          "benefit_type": null,
+          "description": "Covers inpatient rehabilitation costs.",
+          "covered": true,
+          "limits": [
+            {
+              "description": "Rehabilitation Costs",
+              "value": 50000.0,
+              "percentage": null,
+              "unit": "INR",
+              "condition": null
+            }
+          ],
+          "waiting_period_days": null,
+          "conditions": [],
+          "supporting_docs": []
+        }
+      ],
+      "conditions": [],
+      "supporting_info_requirements": []
+    }
+  ],
+  "plan_costs": [
+    {
+      "sum_insured": 3750000.0,
+      "premium": null,
+      "copay_percentage": null,
+      "deductible": null,
+      "age_band": "18-35",
+      "plan_variant": "Imperial Plan"
+    },
+    {
+      "sum_insured": 5600000.0,
+      "premium": null,
+      "copay_percentage": null,
+      "deductible": null,
+      "age_band": "36-45",
+      "plan_variant": "Imperial Plus Plan"
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Pre-Existing Diseases",
+      "description": "Expenses related to treatment of pre-existing diseases and its complications until 36 months of continuous coverage.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 1095
+    },
+    {
+      "name": "Specified Disease Waiting Period",
+      "description": "Expenses related to treatment of specified diseases until 24 months of continuous coverage.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 730
+    },
+    {
+      "name": "30-Day Waiting Period",
+      "description": "Expenses related to treatment of any illness within 30 days from the first policy commencement date.",
+      "exclusion_type": "waiting-period",
+      "waiting_period_days": 30
+    },
+    {
+      "name": "Cosmetic Surgery",
+      "description": "Expenses for cosmetic or plastic surgery unless for reconstruction following an accident.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    },
+    {
+      "name": "Maternity",
+      "description": "Medical treatment expenses traceable to childbirth except ectopic pregnancy.",
+      "exclusion_type": "permanent",
+      "waiting_period_days": null
+    }
+  ],
+  "initial_waiting_period_days": 30,
+  "pre_existing_disease_waiting_days": 1095,
+  "specific_disease_waiting_days": 730,
+  "contact_phone": "1800 209 0144",
+  "contact_email": "bagichelp@bajajallianz.co.in",
+  "contact_website": "www.bajajallianz.com",
+  "network_hospital_count": null,
+  "extraction_confidence": 0.95,
+  "source_pdf_filename": "Bajaj_01.pdf",
+  "extraction_warnings": []
+}
